@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include snehraj *.css
+recursive-include snehraj *.csv
+recursive-include snehraj *.html
+recursive-include snehraj *.ico
+recursive-include snehraj *.js
+recursive-include snehraj *.json
+recursive-include snehraj *.md
+recursive-include snehraj *.png
+recursive-include snehraj *.py
+recursive-include snehraj *.svg
+recursive-include snehraj *.txt
+recursive-exclude snehraj *.pyc
