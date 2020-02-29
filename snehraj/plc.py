@@ -44,8 +44,6 @@ import re
 success_message = "SUCCESS"
 error_message = "@FAIL$"
 
-api_key = "7187cedb5c5e445"
-api_secret_key = "def9d8271a69434"
 
 # user = "pathiksheth@snehraj.com"
 user = "Administrator"
