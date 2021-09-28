@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["SNI Stock Balance"] = {
+frappe.query_reports["Stock Balance Test"] = {
 	"filters": [
 		{
 			"fieldname":"from_date",
@@ -25,9 +25,7 @@ frappe.query_reports["SNI Stock Balance"] = {
 			"label": __("Item Group"),
 			"fieldtype": "Link",
 			"width": "80",
-			"options": "Item Group",
-			"default": "Stationery",
-			"read_only": 0
+			"options": "Item Group"
 		},
 		{
 			"fieldname": "item_code",
@@ -37,8 +35,8 @@ frappe.query_reports["SNI Stock Balance"] = {
 			"options": "Item",
 			"get_query": function() {
 				return {
-					query: "erpnext.controllers.queries.item_query"
-				}
+					query: "erpnext.controllers.queries.item_query",
+				};
 			}
 		},
 		{
@@ -46,12 +44,29 @@ frappe.query_reports["SNI Stock Balance"] = {
 			"label": __("Warehouse"),
 			"fieldtype": "Link",
 			"width": "80",
-			"options": "Warehouse"
+			"options": "Warehouse",
+			get_query: () => {
+				var warehouse_type = frappe.query_report.get_filter_value('warehouse_type');
+				if(warehouse_type){
+					return {
+						filters: {
+							'warehouse_type': warehouse_type
+						}
+					};
+				}
+			}
 		},
 		{
-			"fieldname": "show_variant_attributes",
-			"label": __("Show Variant Attributes"),
-			"fieldtype": "Check"
+			"fieldname":"include_uom",
+			"label": __("Include UOM"),
+			"fieldtype": "Link",
+			"options": "UOM",
+			"default":"Box"
+		},		
+		{
+			"fieldname": 'show_stock_ageing_data',
+			"label": __('Show Stock Ageing Data'),
+			"fieldtype": 'Check'
 		},
 	]
-}
+};

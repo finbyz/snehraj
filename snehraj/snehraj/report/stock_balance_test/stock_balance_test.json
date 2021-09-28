@@ -1,0 +1,28 @@
+{
+ "add_total_row": 1,
+ "creation": "2020-12-26 17:28:06.309121",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Snehraj",
+ "modified": "2020-12-26 17:28:45.417913",
+ "modified_by": "Administrator",
+ "module": "Snehraj",
+ "name": "Stock Balance Test",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Stock Ledger Entry",
+ "report_name": "Stock Balance Test",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Accounts Manager"
+  }
+ ]
+}

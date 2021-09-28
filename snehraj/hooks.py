@@ -11,6 +11,9 @@ app_color = "Orange"
 app_email = "info@finbyz.com"
 app_license = "GPL 3.0"
 
+
+app_include_css = "/assets/snehraj/css/barcode.css"
+
 # Includes in <head>
 # ------------------
 
@@ -160,6 +163,9 @@ doc_events = {
 		"validate": "snehraj.api.job_card_validate",
 		"on_submit": "snehraj.api.job_card_on_submit",
 		"on_cancel": "snehraj.api.job_card_on_cancel",
+	},
+	"Fiscal Year": {
+		'before_save': 'snehraj.api.fiscal_before_save'
 	},
 }
 
