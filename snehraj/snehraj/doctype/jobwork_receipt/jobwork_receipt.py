@@ -35,6 +35,7 @@ class JobworkReceipt(Document):
 		self.total_qty = sum([flt(row.qty) for row in self.items])
 		self.total_amount = sum([flt(row.basic_amount) for row in self.items])
 
+	@frappe.whitelist()
 	def insert_item_details(self):
 
 		if not self.item:

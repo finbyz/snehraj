@@ -95,8 +95,8 @@ def delete_transfer_batches(self):
 			row.db_set('old_batch_no', '')
 			batch_no.db_set('reference_doctype','')
 			batch_no.db_set('reference_name','')
-	else:
-		frappe.db.commit()
+	# else:
+	# 	frappe.db.commit()
 
 def update_stock_ledger_batch(self):
 	for row in self.get('items'):
@@ -104,6 +104,7 @@ def update_stock_ledger_batch(self):
 			'voucher_no': self.name,
 			'voucher_detail_no': row.name,
 			'warehouse': row.t_warehouse,
+			'is_cancelled':0,
 		})
 
 		if sle:
@@ -156,8 +157,8 @@ def delete_batches(self, warehouse):
 			# check_if_doc_is_linked(batch_no)
 			# frappe.delete_doc("Batch", batch_no.name)
 			# row.db_set('batch_no', '')
-	else:
-		frappe.db.commit()
+	# else:
+	# 	frappe.db.commit()
 
 
 @frappe.whitelist()
@@ -197,6 +198,7 @@ def batch_autoname(self):
 	# self.barcode_show = name
 	self.name = name
 
+@frappe.whitelist()
 def get_batch_no(doctype, txt, searchfield, start, page_len, filters):
 	cond = ""
 
@@ -226,6 +228,7 @@ def get_batch_no(doctype, txt, searchfield, start, page_len, filters):
 				where
 					sle.item_code = %(item_code)s
 					and sle.warehouse = %(warehouse)s
+					and sle.is_cancelled = 0
 					and batch.docstatus < 2
 					{0}
 					{match_conditions}
@@ -277,8 +280,7 @@ def update_batch_valuation(self):
 				batch_doc = frappe.get_doc("Batch", row.batch_no)
 				batch_doc.valuation_rate = row.valuation_rate
 				batch_doc.save()
-		else:
-			frappe.db.commit()
+
 
 def validate_batch_actual_qty(self):
 	from erpnext.stock.doctype.batch.batch import get_batch_qty
@@ -292,3 +294,7 @@ def validate_batch_actual_qty(self):
 
 				if batch_qty < row.stock_qty:
 					frappe.throw(_("The batch <b>{0}</b> does not have sufficient quantity for item <b>{1}</b> in row {2}.".format(row.batch_no, row.item_code, d.idx)))
+
+
+def delete_auto_created_batches(self):
+	pass

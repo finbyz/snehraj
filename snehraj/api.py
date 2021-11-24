@@ -327,7 +327,7 @@ def get_batch_qty(filters):
 					sle.item_code = %(item_code)s
 					and sle.warehouse = %(warehouse)s
 					and sle.batch_no = %(batch_no)s
-					and batch.docstatus < 2
+					and batch.docstatus < 2 and sle.is_cancelled = 0
 				group by batch_no having sum(sle.actual_qty) > 0
 				order by batch.expiry_date, sle.batch_no desc""", args)
 
@@ -591,7 +591,7 @@ def cancel_jc_stock_entry(self):
 
 @frappe.whitelist()
 def make_stock_entry(work_order_id, purpose, qty=None):
-	from erpnext.stock.doctype.stock_entry.stock_entry import get_additional_costs
+	# from erpnext.stock.doctype.stock_entry.stock_entry import get_additional_costs
 
 	work_order = frappe.get_doc("Work Order", work_order_id)
 	if not frappe.db.get_value("Warehouse", work_order.wip_warehouse, "is_group") \
@@ -619,10 +619,10 @@ def make_stock_entry(work_order_id, purpose, qty=None):
 		stock_entry.from_warehouse = wip_warehouse
 		stock_entry.to_warehouse = work_order.fg_warehouse
 		stock_entry.project = work_order.project
-		if purpose=="Manufacture":
-			additional_costs = get_additional_costs(work_order, fg_qty=stock_entry.fg_completed_qty)
-			stock_entry.set("additional_costs", additional_costs)
-
+		# if purpose=="Manufacture":
+		# 	additional_costs = get_additional_costs(work_order, fg_qty=stock_entry.fg_completed_qty)
+		# 	stock_entry.set("additional_costs", additional_costs)
+	stock_entry.set_stock_entry_type()
 	stock_entry.get_items()
 
 	job_cards = frappe.get_list("Job Card", {'work_order': work_order_id, 'docstatus': 1})

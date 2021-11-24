@@ -100,6 +100,12 @@ app_include_css = "/assets/snehraj/css/barcode.css"
 # 		"on_trash": "method"
 #	}
 # }
+from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
+from erpnext.stock.doctype.purchase_receipt.purchase_receipt import PurchaseReceipt
+from snehraj.batch_valuation import delete_auto_created_batches
+
+PurchaseReceipt.delete_auto_created_batches = delete_auto_created_batches
+StockEntry.delete_auto_created_batches = delete_auto_created_batches
 
 override_whitelisted_methods = {
 	"frappe.core.page.permission_manager.permission_manager.get_roles_and_doctypes": "snehraj.permission.get_roles_and_doctypes",
@@ -203,3 +209,36 @@ doc_events = {
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "snehraj.event.get_events"
 # }
+
+# Chemical Overrides
+
+from snehraj.batch_valuation_overrides import get_supplied_items_cost,set_incoming_rate_buying,set_incoming_rate_selling,get_rate_for_return,get_incoming_rate,process_sle,get_args_for_incoming_rate
+
+# Buying controllers
+from erpnext.controllers.buying_controller import BuyingController
+BuyingController.get_supplied_items_cost = get_supplied_items_cost
+BuyingController.set_incoming_rate = set_incoming_rate_buying
+
+# Selling controllers
+from erpnext.controllers.selling_controller import SellingController
+SellingController.set_incoming_rate = set_incoming_rate_selling
+
+# sales and purchase return
+from erpnext.controllers import sales_and_purchase_return
+sales_and_purchase_return.get_rate_for_return =  get_rate_for_return
+
+# utils
+
+# from erpnext.stock import utils
+# utils.get_incoming_rate =  get_incoming_rate
+
+import erpnext
+erpnext.stock.utils.get_incoming_rate = get_incoming_rate
+
+# stock_ledger
+from erpnext.stock.stock_ledger import update_entries_after
+update_entries_after.process_sle =  process_sle
+
+# stock entry
+from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
+StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate

@@ -8,7 +8,7 @@ frappe.query_reports["SNI Ordered Item to Delivered Report"] = {
 			"fieldname": "date_range",
 			"fieldtype": "DateRange",
 			"label": __("Delivery Date Range"),
-			"default": [frappe.datetime.add_days(frappe.datetime.nowdate(), -30), frappe.datetime.nowdate()] 
+			"default": [frappe.datetime.add_days(frappe.datetime.nowdate(), -30), frappe.datetime.add_days(frappe.datetime.nowdate(),15)] 
 		}
 	]
 }
