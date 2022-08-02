@@ -106,7 +106,7 @@ class JobworkReceipt(Document):
 		se.naming_series = "STE-.fiscal.-"
 		se.stock_entry_type = "Material Receipt"
 		se.purpose = "Material Receipt"
-		se.posting_date = self.posting_date
+		se.posting_date = str(self.posting_date)
 		se.posting_time = self.posting_time
 		se.company = self.company
 		se.set_posting_time = self.set_posting_time
@@ -135,8 +135,9 @@ class JobworkReceipt(Document):
 		try:
 			se.save()
 			se.submit()
-		except:
+		except Exception as e:
 			frappe.db.rollback()
+			frappe.log_error(message=e)
 			frappe.throw(_("Error creating Stock Entry"), title="Error")
 		else:
 			self.update_batch_no(se)
