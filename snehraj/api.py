@@ -186,7 +186,8 @@ def discount_validation(self):
 
 @frappe.whitelist()
 def so_on_submit(self, method):
-	send_so_mail(self)
+	return
+	# send_so_mail(self)
 
 def send_so_mail(self):
 	if self.sales_person == "Bijal Shah":
