@@ -23,10 +23,11 @@ if not frappe.db.exists("Customer","Test_Customer_1"):
         "customer_name":"Test_Customer_1",
         "customer_type":"Company",
         "territory":"All Territories",
-        "customer_group":"All Customer Groups"
+        "customer_group":"All Customer Groups",
+        'sales_person' : 'Test'
     })
     customer_create.append("sales_team",{
-            "sales_peron":"Sales Team",
+            "sales_person":"Sales Team",
             "allocated_percentage":100
         }
     )
@@ -52,6 +53,7 @@ if not frappe.db.exists("Item","TEST_ITEM_1"):
     item_create.is_stock_item = 1
     item_create.include_item_in_manufacturing = 1
     item_create.has_batch_no = 1
+    item_create.gst_hsn_code = 999900
     company =  frappe.db.get_value("Company",{},"company_name") #it will Fetch the First Name of the Company from the list
     warehouse =  frappe.db.get_value("Warehouse",{'company':company,"warehouse_name":"Stores"},"name") #it will Fetch the warehouse of the given Company
     default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
@@ -70,6 +72,7 @@ if not frappe.db.exists("Item","TEST_ITEM_2"):
     item_create.is_stock_item = 1
     item_create.include_item_in_manufacturing = 1
     item_create.has_batch_no = 1
+    item_create.gst_hsn_code = 999900
     default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
     item_create.append("item_defaults",{
             "company":company,
@@ -85,6 +88,7 @@ if not frappe.db.exists("Item","TEST_ITEM_3"):
     item_create.is_stock_item = 1
     item_create.include_item_in_manufacturing = 1
     item_create.has_batch_no = 1
+    item_create.gst_hsn_code = 999795
     default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
     item_create.append("item_defaults",{
             "company":company,
@@ -100,6 +104,7 @@ if not frappe.db.exists("Item","FINISH_TEST_ITEM"):
     item_create.is_stock_item = 1
     item_create.include_item_in_manufacturing = 1
     item_create.has_batch_no = 1
+    item_create.gst_hsn_code = 999793
     default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
     item_create.append("item_defaults",{
             "company":company,
@@ -1067,7 +1072,7 @@ else:
 supplier_delete = frappe.get_doc("Supplier","Test_Supplier_1")
 supplier_delete.delete()
 customer_delete = frappe.get_doc("Customer","Test_Customer_1")
-customer_delete.delete() 
+customer_delete.delete()
 
 
 
