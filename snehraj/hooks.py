@@ -243,6 +243,6 @@ from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
 # StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate
 
 
-from snehraj.snehraj.report.trends import get_data as trends_data
-from erpnext.controllers import trends
-trends.get_data = trends_data
+# from snehraj.snehraj.report.trends import get_data as trends_data
+# from erpnext.controllers import trends
+# trends.get_data = trends_data
