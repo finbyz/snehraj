@@ -770,7 +770,7 @@ def run_patches():
     stock_entry_mi.save()
     stock_entry_mi_name = stock_entry_mi.name
     stock_entry_mi.submit()
-
+    frappe.db.commit()
     # 
 
     #Purchase Receipt (pr)
