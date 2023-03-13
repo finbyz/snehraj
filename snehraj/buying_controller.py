@@ -21,7 +21,7 @@ class QtyMismatchError(ValidationError):
 	pass
 
 
-class BuyingController(SubcontractingController):
+class CustomBuyingController(SubcontractingController):
 	def __setup__(self):
 		self.flags.ignore_permlevel_for_fields = ["buying_price_list", "price_list_currency"]
 

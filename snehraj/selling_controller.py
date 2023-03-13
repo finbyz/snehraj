@@ -15,7 +15,7 @@ from erpnext.stock.get_item_details import get_bin_details, get_conversion_facto
 from erpnext.stock.utils import get_incoming_rate
 
 
-class SellingController(StockController):
+class CustomSellingController(StockController):
 	def __setup__(self):
 		self.flags.ignore_permlevel_for_fields = ["selling_price_list", "price_list_currency"]
 

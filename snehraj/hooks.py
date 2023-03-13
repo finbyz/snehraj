@@ -101,8 +101,8 @@ app_include_css = "/assets/snehraj/css/barcode.css"
 #	}
 # }
 override_doctype_class = {
-	"SellingController":"snehraj.selling_controller.SellingController",
-	"BuyingController":"snehraj.selling_controller.BuyingController",
+	"SellingController":"snehraj.selling_controller.CustomSellingController",
+	"BuyingController":"snehraj.selling_controller.CustomBuyingController",
     "Stock Entry" : "snehraj.stock_entry.StockEntry"
 }
 from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
