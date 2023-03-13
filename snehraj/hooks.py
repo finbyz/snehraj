@@ -209,7 +209,8 @@ doc_events = {
 #
 override_doctype_class = {
     "SellingController": "snehraj.selling_controller.SellingController",
-    "BuyingController" : "snehraj.buying_controller.BuyingController"
+    "BuyingController" : "snehraj.buying_controller.BuyingController",
+    "Stock Entry" : "snehraj.stock_entry.StockEntry"
 	}
 
 # override_whitelisted_methods = {
@@ -218,7 +219,7 @@ override_doctype_class = {
 
 # Chemical Overrides
 
-# from snehraj.batch_valuation_overrides import set_incoming_rate_buying,set_incoming_rate_selling,get_rate_for_return,get_incoming_rate,process_sle,get_args_for_incoming_rate
+from snehraj.batch_valuation_overrides import set_incoming_rate_buying,set_incoming_rate_selling,get_rate_for_return,get_incoming_rate,process_sle,get_args_for_incoming_rate
 
 # Buying controllers
 from erpnext.controllers.buying_controller import BuyingController
@@ -230,7 +231,7 @@ from erpnext.controllers.selling_controller import SellingController
 
 # sales and purchase return
 from erpnext.controllers import sales_and_purchase_return
-# sales_and_purchase_return.get_rate_for_return =  get_rate_for_return
+sales_and_purchase_return.get_rate_for_return =  get_rate_for_return
 
 # utils
 
