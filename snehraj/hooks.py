@@ -100,6 +100,10 @@ app_include_css = "/assets/snehraj/css/barcode.css"
 # 		"on_trash": "method"
 #	}
 # }
+override_doctype_class = {
+	"SellingController":"snehraj.selling_controller.SellingController",
+	"BuyingController":"snehraj.selling_controller.BuyingController",
+}
 from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
 from erpnext.stock.doctype.purchase_receipt.purchase_receipt import PurchaseReceipt
 from snehraj.batch_valuation import delete_auto_created_batches
@@ -117,6 +121,7 @@ override_whitelisted_methods = {
 	"frappe.core.page.permission_manager.permission_manager.get_users_with_role": "snehraj.permission.get_users_with_role",
 	"frappe.core.page.permission_manager.permission_manager.get_standard_permissions": "snehraj.permission.get_standard_permissions",
 	"frappe.utils.print_format.download_multi_pdf": "snehraj.print_format.download_multi_pdf",
+    "erpnext.stock.utils.get_incoming_rate" : "snehraj.batch_valuation_overrides.get_incoming_rate"
 	# "erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry": "snehraj.api.make_stock_entry",
 }
 
@@ -215,13 +220,13 @@ doc_events = {
 from snehraj.batch_valuation_overrides import get_supplied_items_cost,set_incoming_rate_buying,set_incoming_rate_selling,get_rate_for_return,get_incoming_rate,process_sle,get_args_for_incoming_rate
 
 # Buying controllers
-from erpnext.controllers.buying_controller import BuyingController
-BuyingController.get_supplied_items_cost = get_supplied_items_cost
-BuyingController.set_incoming_rate = set_incoming_rate_buying
+# from erpnext.controllers.buying_controller import BuyingController
+# BuyingController.get_supplied_items_cost = get_supplied_items_cost
+# BuyingController.set_incoming_rate = set_incoming_rate_buying
 
 # Selling controllers
-from erpnext.controllers.selling_controller import SellingController
-SellingController.set_incoming_rate = set_incoming_rate_selling
+# from erpnext.controllers.selling_controller import SellingController
+# SellingController.set_incoming_rate = set_incoming_rate_selling
 
 # sales and purchase return
 from erpnext.controllers import sales_and_purchase_return
@@ -232,8 +237,8 @@ sales_and_purchase_return.get_rate_for_return =  get_rate_for_return
 # from erpnext.stock import utils
 # utils.get_incoming_rate =  get_incoming_rate
 
-import erpnext
-erpnext.stock.utils.get_incoming_rate = get_incoming_rate
+# import erpnext #whitelisted function
+# erpnext.stock.utils.get_incoming_rate = get_incoming_rate
 
 # stock_ledger
 from erpnext.stock.stock_ledger import update_entries_after

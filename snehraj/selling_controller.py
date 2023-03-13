@@ -453,7 +453,6 @@ class SellingController(StockController):
 				d.incoming_rate = get_rate_for_return(self.doctype, self.name, d.item_code, self.return_against, item_row=d)
 
 
-
 	def update_stock_ledger(self):
 		self.update_reserved_qty()
 
