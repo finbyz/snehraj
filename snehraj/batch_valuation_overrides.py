@@ -11,6 +11,7 @@ import json
 # Utils Overrides
 @frappe.whitelist()
 def get_incoming_rate(args, raise_error_if_no_rate=True):
+	print("batch_valuation_override")
 	"""Get Incoming Rate based on valuation method"""
 	from erpnext.stock.stock_ledger import get_previous_sle, get_valuation_rate
 	if isinstance(args, string_types):
