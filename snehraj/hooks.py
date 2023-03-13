@@ -121,8 +121,8 @@ override_whitelisted_methods = {
 	"frappe.core.page.permission_manager.permission_manager.get_users_with_role": "snehraj.permission.get_users_with_role",
 	"frappe.core.page.permission_manager.permission_manager.get_standard_permissions": "snehraj.permission.get_standard_permissions",
 	"frappe.utils.print_format.download_multi_pdf": "snehraj.print_format.download_multi_pdf",
-    "erpnext.stock.utils.get_incoming_rate" : "snehraj.batch_valuation_overrides.get_incoming_rate"
-	# "erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry": "snehraj.api.make_stock_entry",
+    "erpnext.stock.utils.get_incoming_rate" : "snehraj.batch_valuation_overrides.get_incoming_rate",
+	"erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry": "snehraj.api.make_stock_entry",
 }
 
 doc_events = {
