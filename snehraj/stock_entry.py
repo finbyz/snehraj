@@ -101,6 +101,7 @@ class StockEntry(StockController):
             apply_putaway_rule(self.doctype, self.get("items"), self.company, purpose=self.purpose)
 
     def validate(self):
+        print("chal rahe bhai")
         self.pro_doc = frappe._dict()
         if self.work_order:
             self.pro_doc = frappe.get_doc("Work Order", self.work_order)
@@ -716,6 +717,7 @@ class StockEntry(StockController):
         return outgoing_items_cost
 
     def get_args_for_incoming_rate(self, item):
+        print("chaligyu bapa chali gyu")
         return frappe._dict({
             "item_code": item.item_code,
             "warehouse": item.s_warehouse or item.t_warehouse,

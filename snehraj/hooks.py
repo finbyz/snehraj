@@ -246,8 +246,8 @@ from erpnext.stock.stock_ledger import update_entries_after
 update_entries_after.process_sle =  process_sle
 
 # stock entry
-from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
-StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate
+# from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
+# StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate
 
 
 # from snehraj.snehraj.report.trends import get_data as trends_data
