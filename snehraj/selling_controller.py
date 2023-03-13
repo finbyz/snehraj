@@ -29,6 +29,7 @@ class CustomSellingController(StockController):
 				item.update(get_bin_details(item.item_code, item.warehouse, include_child_warehouses=True))
 
 	def validate(self):
+		print("override is working selling controller")
 		super(SellingController, self).validate()
 		self.validate_items()
 		self.validate_max_discount()

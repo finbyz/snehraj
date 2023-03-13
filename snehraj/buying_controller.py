@@ -30,6 +30,7 @@ class CustomBuyingController(SubcontractingController):
 			return _("From {0} | {1} {2}").format(self.supplier_name, self.currency, self.grand_total)
 
 	def validate(self):
+		print('override working buying controller')
 		super(BuyingController, self).validate()
 		if getattr(self, "supplier", None) and not self.supplier_name:
 			self.supplier_name = frappe.db.get_value("Supplier", self.supplier, "supplier_name")
