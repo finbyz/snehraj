@@ -116,6 +116,7 @@ override_whitelisted_methods = {
 	"frappe.core.page.permission_manager.permission_manager.reset": "snehraj.permission.reset",
 	"frappe.core.page.permission_manager.permission_manager.get_users_with_role": "snehraj.permission.get_users_with_role",
 	"frappe.core.page.permission_manager.permission_manager.get_standard_permissions": "snehraj.permission.get_standard_permissions",
+    
 	"frappe.utils.print_format.download_multi_pdf": "snehraj.print_format.download_multi_pdf",
 	# "erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry": "snehraj.api.make_stock_entry",
 }
@@ -206,6 +207,11 @@ doc_events = {
 # Overriding Whitelisted Methods
 # ------------------------------
 #
+override_doctype_class = {
+    "SellingController": "snehraj.selling_controller.SellingController",
+    "BuyingController" : "snehraj.buying_controller.BuyingController"
+	}
+
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "snehraj.event.get_events"
 # }
