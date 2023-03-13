@@ -223,11 +223,11 @@ from snehraj.batch_valuation_overrides import set_incoming_rate_buying,set_incom
 
 # Buying controllers
 from erpnext.controllers.buying_controller import BuyingController
-# BuyingController.set_incoming_rate = set_incoming_rate_buying
+BuyingController.set_incoming_rate = set_incoming_rate_buying
 
 # Selling controllers
 from erpnext.controllers.selling_controller import SellingController
-# SellingController.set_incoming_rate = set_incoming_rate_selling
+SellingController.set_incoming_rate = set_incoming_rate_selling
 
 # sales and purchase return
 from erpnext.controllers import sales_and_purchase_return
@@ -239,15 +239,15 @@ sales_and_purchase_return.get_rate_for_return =  get_rate_for_return
 # utils.get_incoming_rate =  get_incoming_rate
 
 import erpnext
-# erpnext.stock.utils.get_incoming_rate = get_incoming_rate
+erpnext.stock.utils.get_incoming_rate = get_incoming_rate
 
 # stock_ledger
 from erpnext.stock.stock_ledger import update_entries_after
-# update_entries_after.process_sle =  process_sle
+update_entries_after.process_sle =  process_sle
 
 # stock entry
 from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
-# StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate
+StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate
 
 
 # from snehraj.snehraj.report.trends import get_data as trends_data
