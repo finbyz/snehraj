@@ -593,7 +593,7 @@ def cancel_jc_stock_entry(self):
 @frappe.whitelist()
 def make_stock_entry(work_order_id, purpose, qty=None):
 	# from erpnext.stock.doctype.stock_entry.stock_entry import get_additional_costs
-
+	print("chalyu ho chalyu")
 	work_order = frappe.get_doc("Work Order", work_order_id)
 	if not frappe.db.get_value("Warehouse", work_order.wip_warehouse, "is_group") \
 			and not work_order.skip_transfer:
