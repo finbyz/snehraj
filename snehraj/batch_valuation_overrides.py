@@ -5,13 +5,17 @@ from erpnext.stock.stock_ledger import update_entries_after,get_valuation_rate
 from erpnext.controllers.sales_and_purchase_return import get_return_against_item_fields,get_filters
 from erpnext.stock.utils import get_valuation_method,get_fifo_rate
 from six import string_types
+from erpnext.stock.utils import get_avg_purchase_rate
+
+
 
 import json
 
 # Utils Overrides
 @frappe.whitelist()
 def get_incoming_rate(args, raise_error_if_no_rate=True):
-	print("batch_valuation_override")
+	 
+	print("batch_valuation_override not erpnext")
 	"""Get Incoming Rate based on valuation method"""
 	from erpnext.stock.stock_ledger import get_previous_sle, get_valuation_rate
 	if isinstance(args, string_types):
@@ -122,7 +126,7 @@ def process_sle(self, sle):
 				self.wh_data.stock_value = sum((flt(batch[0]) * flt(batch[1]) for batch in self.wh_data.stock_queue))
 
 	# rounding as per precision
-	self.wh_data.stock_value = flt(self.wh_data.stock_value, self.precision)
+	self.wh_data.stock_value = flt(self.wh_data.stock_value, 2)
 	stock_value_difference = self.wh_data.stock_value - self.wh_data.prev_stock_value
 	self.wh_data.prev_stock_value = self.wh_data.stock_value
 
@@ -226,6 +230,7 @@ def get_supplied_items_cost(self, item_row_id, reset_outgoing_rate=True):
 			supplied_items_cost += flt(d.amount)
 
 	return supplied_items_cost
+
 @frappe.whitelist()
 def set_incoming_rate_buying(self):
 	if self.doctype not in ("Purchase Receipt", "Purchase Invoice", "Purchase Order"):
@@ -314,6 +319,7 @@ def set_incoming_rate_selling(self):
 # sales and purchase return
 def get_rate_for_return(voucher_type, voucher_no, item_code, return_against=None,
 	item_row=None, voucher_detail_no=None, sle=None):
+	print("sales and purchasxe return")
 	if not return_against:
 		return_against = frappe.get_cached_value(voucher_type, voucher_no, "return_against")
 

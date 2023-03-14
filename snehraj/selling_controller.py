@@ -12,10 +12,10 @@ from erpnext.controllers.sales_and_purchase_return import get_rate_for_return
 from erpnext.controllers.stock_controller import StockController
 from erpnext.stock.doctype.item.item import set_item_default
 from erpnext.stock.get_item_details import get_bin_details, get_conversion_factor
-from erpnext.stock.utils import get_incoming_rate
+from snehraj.batch_valuation_overrides import get_incoming_rate
 
 
-class CustomSellingController(StockController):
+class SellingController(StockController):
 	def __setup__(self):
 		self.flags.ignore_permlevel_for_fields = ["selling_price_list", "price_list_currency"]
 
@@ -44,7 +44,7 @@ class CustomSellingController(StockController):
 		self.validate_auto_repeat_subscription_dates()
 
 	def set_missing_values(self, for_validate=False):
-
+		print("override is working selling controller")
 		super(SellingController, self).set_missing_values(for_validate)
 
 		# set contact and address details for customer, if they are not mentioned
@@ -52,6 +52,7 @@ class CustomSellingController(StockController):
 		self.set_price_list_and_item_details(for_validate=for_validate)
 
 	def set_missing_lead_customer_details(self, for_validate=False):
+		print("override is working selling controller")
 		customer, lead = None, None
 		if getattr(self, "customer", None):
 			customer = self.customer
@@ -127,6 +128,7 @@ class CustomSellingController(StockController):
 				self.calculate_taxes_and_totals()
 
 	def set_total_in_words(self):
+		print("override is working selling controller")
 		from frappe.utils import money_in_words
 
 		if self.meta.get_field("base_in_words"):
@@ -203,6 +205,7 @@ class CustomSellingController(StockController):
 				d.stock_qty = flt(d.qty) * flt(d.conversion_factor)
 
 	def validate_selling_price(self):
+		print("override is working selling controller")
 		def throw_message(idx, item_name, rate, ref_rate_field):
 			throw(
 				_(
@@ -287,6 +290,7 @@ class CustomSellingController(StockController):
 				throw_message(item.idx, item.item_name, last_valuation_rate_in_sales_uom, "valuation rate")
 
 	def get_item_list(self):
+		print("override is working selling controller")
 		il = []
 		for d in self.get("items"):
 			if d.qty is None:
@@ -455,6 +459,7 @@ class CustomSellingController(StockController):
 
 
 	def update_stock_ledger(self):
+		print("override is working selling controller")
 		self.update_reserved_qty()
 
 		sl_entries = []
@@ -501,6 +506,7 @@ class CustomSellingController(StockController):
 		return sle
 
 	def get_sle_for_target_warehouse(self, item_row):
+		print("override is working selling controller")
 		sle = self.get_sl_entries(
 			item_row, {"actual_qty": flt(item_row.qty), "warehouse": item_row.target_warehouse}
 		)

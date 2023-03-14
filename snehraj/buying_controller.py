@@ -16,12 +16,11 @@ from erpnext.controllers.subcontracting_controller import SubcontractingControll
 from erpnext.stock.get_item_details import get_conversion_factor
 from erpnext.stock.utils import get_incoming_rate
 
-
 class QtyMismatchError(ValidationError):
 	pass
 
 
-class CustomBuyingController(SubcontractingController):
+class BuyingController(SubcontractingController):
 	def __setup__(self):
 		self.flags.ignore_permlevel_for_fields = ["buying_price_list", "price_list_currency"]
 
