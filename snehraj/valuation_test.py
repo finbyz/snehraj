@@ -17,23 +17,21 @@ from snehraj.api import make_stock_entry
 #     return company, warehouse
 
 #Create New Customer
-def run_patches():
+def run_patches(): 
     if not frappe.db.exists("Customer","Test_Customer_1"):
         customer_create = frappe.get_doc({
             "doctype":"Customer",
             "customer_name":"Test_Customer_1",
             "customer_type":"Company",
             "territory":"All Territories",
-            "customer_group":"All Customer Groups",
-            'sales_person' : 'Test'
+            "customer_group":"All Customer Groups"
         })
         customer_create.append("sales_team",{
-                "sales_person":"Sales Team",
+                "sales_peron":"Sales Team",
                 "allocated_percentage":100
             }
         )
         customer_create.save()
-        print(customer_create)
 
     #Create New Supplier
     if not frappe.db.exists("Supplier","Test_Supplier_1"):
@@ -45,7 +43,7 @@ def run_patches():
             "country":"India"
         })
         supplier_create.save()
-        print(supplier_create)
+
     #Create New Item
 
     if not frappe.db.exists("Item","TEST_ITEM_1"):
@@ -55,7 +53,6 @@ def run_patches():
         item_create.is_stock_item = 1
         item_create.include_item_in_manufacturing = 1
         item_create.has_batch_no = 1
-        item_create.gst_hsn_code = 999900
         company =  frappe.db.get_value("Company",{},"company_name") #it will Fetch the First Name of the Company from the list
         warehouse =  frappe.db.get_value("Warehouse",{'company':company,"warehouse_name":"Stores"},"name") #it will Fetch the warehouse of the given Company
         default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
@@ -66,7 +63,6 @@ def run_patches():
                 "expense_account":default_expense_account
         })
         item_create.save()
-        print(item_create)
 
     if not frappe.db.exists("Item","TEST_ITEM_2"):
         item_create = frappe.new_doc("Item")
@@ -75,7 +71,6 @@ def run_patches():
         item_create.is_stock_item = 1
         item_create.include_item_in_manufacturing = 1
         item_create.has_batch_no = 1
-        item_create.gst_hsn_code = 999900
         default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
         item_create.append("item_defaults",{
                 "company":company,
@@ -83,7 +78,7 @@ def run_patches():
                 "expense_account":default_expense_account
         })
         item_create.save()
-        print(item_create)
+
     if not frappe.db.exists("Item","TEST_ITEM_3"):
         item_create = frappe.new_doc("Item")
         item_create.item_code = "TEST_ITEM_3"
@@ -91,7 +86,6 @@ def run_patches():
         item_create.is_stock_item = 1
         item_create.include_item_in_manufacturing = 1
         item_create.has_batch_no = 1
-        item_create.gst_hsn_code = 999795
         default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
         item_create.append("item_defaults",{
                 "company":company,
@@ -99,7 +93,7 @@ def run_patches():
                 "expense_account":default_expense_account
         })
         item_create.save()
-        print(item_create)
+
     if not frappe.db.exists("Item","FINISH_TEST_ITEM"):
         item_create = frappe.new_doc("Item")
         item_create.item_code = "FINISH_TEST_ITEM"
@@ -107,7 +101,6 @@ def run_patches():
         item_create.is_stock_item = 1
         item_create.include_item_in_manufacturing = 1
         item_create.has_batch_no = 1
-        item_create.gst_hsn_code = 999793
         default_warehouse = frappe.db.get_value("Warehouse",{"company":company, "warehouse_name":"Stores"},"name")
         item_create.append("item_defaults",{
                 "company":company,
@@ -115,7 +108,7 @@ def run_patches():
                 "expense_account":default_expense_account
         })
         item_create.save()
-        print(item_create)
+
     # if not frappe.db.exists("Manufacturer","gg"):
     #     manufact = frappe.new_doc("Manufacturer")
     #     manufact.short_name = "gg"
@@ -198,7 +191,6 @@ def run_patches():
     first_pr.save()
     first_pr_name = first_pr.name
     first_pr.submit()
-    print(first_pr)
     first_pr_batch_no = frappe.db.get_value("Purchase Receipt Item",{"parent" : first_pr_name,"item_code":"TEST_ITEM_1"}, "batch_no")
     first_stock_ledger_pr_name = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":first_pr_name,"item_code":"TEST_ITEM_1"},"name")
 
@@ -269,7 +261,6 @@ def run_patches():
     second_pr.save()
     second_pr_name = second_pr.name
     second_pr.submit()
-    print(second_pr)
     second_pr_batch_no = frappe.db.get_value("Purchase Receipt Item",{"parent" : second_pr_name,"item_code":"TEST_ITEM_2"}, "batch_no")
     second_pr_third_item_batch_no = frappe.db.get_value("Purchase Receipt Item",{"parent" : second_pr_name,"item_code":"TEST_ITEM_3"}, "batch_no")
     second_stock_ledger_pr_name = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":second_pr_name,"item_code":"TEST_ITEM_2"},"name")
@@ -341,7 +332,6 @@ def run_patches():
     third_pr.save()
     third_pr_name = third_pr.name
     third_pr.submit()
-    print(third_pr)
     third_pr_batch_no = frappe.db.get_value("Purchase Receipt Item",{"parent" : third_pr_name,"item_code":"TEST_ITEM_3"}, "batch_no")
     third_stock_ledger_pr_name = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":third_pr_name,"item_code":"TEST_ITEM_3"},"name")
 
@@ -588,7 +578,6 @@ def run_patches():
     work_order_create.save()
     work_name = work_order_create.name
     work_order_create.submit()
-    print(work_order_create)
 
 
     # mtm = Material Transfer For Manufacture
@@ -617,7 +606,6 @@ def run_patches():
     stock_entry_mtm.save()
     stock_entry_mtm_name = stock_entry_mtm.name
     stock_entry_mtm.submit()
-    print(stock_entry_mtm)
     first_stock_ledger_mtm_item_name = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":stock_entry_mtm_name,"item_code":"TEST_ITEM_1"},"name")
     second_stock_ledger_mtm_item_name = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":stock_entry_mtm_name,"item_code":"TEST_ITEM_2"},"name")
     third_stock_ledger_mtm_item_name = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":stock_entry_mtm_name,"item_code":"TEST_ITEM_3"},"name")
@@ -649,7 +637,6 @@ def run_patches():
     stock_entry_mr.save()
     stock_entry_mr_1_name = stock_entry_mr.name
     stock_entry_mr.submit()
-    print(stock_entry_mr)
     stock_entry_mr_1_batch_no = frappe.db.get_value("Batch",{"reference_name": stock_entry_mr_1_name},"name")
 
 
@@ -690,7 +677,6 @@ def run_patches():
     stock_entry_ma.save()
     stock_entry_ma_name = stock_entry_ma.name
     stock_entry_ma.submit()
-    print(stock_entry_ma)
     final_item_batch_no = frappe.db.get_value("Stock Entry Detail",{"parent" : stock_entry_ma_name,"item_code":"FINISH_TEST_ITEM"},"batch_no")
     first_stock_ledger_ma_item = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":stock_entry_ma_name,"item_code":"TEST_ITEM_1"},"name")
     second_stock_ledger_ma_item = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":stock_entry_ma_name,"item_code":"TEST_ITEM_2"},"name")
@@ -732,7 +718,7 @@ def run_patches():
     cost_center = frappe.db.get_value("Company",company,"cost_center")
 
     second_si = frappe.new_doc("Sales Invoice")
-    second_si.naming_series = "Test-SALINV-.###"
+    second_si.naming_series = "Test-INV-.###"
     second_si.customer = "Test_Customer_1"
     second_si.set_posting_time = 1
     second_si.posting_date = frappe.utils.add_days(frappe.utils.nowdate(), 2)
@@ -756,7 +742,6 @@ def run_patches():
     second_si.save()
     second_si_name = second_si.name
     second_si.submit()
-    print(second_si)
     stock_ledger_second_si = frappe.db.get_value("Stock Ledger Entry",{"voucher_no":second_si_name},"name")
 
 
@@ -780,8 +765,7 @@ def run_patches():
     stock_entry_mi.save()
     stock_entry_mi_name = stock_entry_mi.name
     stock_entry_mi.submit()
-    print(stock_entry_mi)
-    frappe.db.commit()
+
     # 
 
     #Purchase Receipt (pr)
@@ -908,7 +892,8 @@ def run_patches():
     msg="PR3: Batch ID Doesn't Match"
     assert third_pr_batch_no == third_sl_pr_batch_no,msg
     #self.assertEqual(third_pr_batch_no,third_sl_pr_batch_no,msg="PR3: Batch ID Doesn't Match")
-
+    print(first_pr_rate)
+    print(first_sl_mtm_incoming_rate)
     msg="MTM1: Incoming Rate Doesn't Match"
     assert first_pr_rate == first_sl_mtm_incoming_rate,msg
     #self.assertEqual(first_pr_rate,first_sl_mtm_incoming_rate,msg="MTM1: Incoming Rate Doesn't Match")
@@ -1084,7 +1069,7 @@ def run_patches():
     supplier_delete = frappe.get_doc("Supplier","Test_Supplier_1")
     supplier_delete.delete()
     customer_delete = frappe.get_doc("Customer","Test_Customer_1")
-    customer_delete.delete()
+    customer_delete.delete() 
 
 
 

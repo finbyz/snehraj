@@ -108,71 +108,71 @@ PurchaseReceipt.delete_auto_created_batches = delete_auto_created_batches
 StockEntry.delete_auto_created_batches = delete_auto_created_batches
 
 override_whitelisted_methods = {
-	"frappe.core.page.permission_manager.permission_manager.get_roles_and_doctypes": "snehraj.permission.get_roles_and_doctypes",
-	"frappe.core.page.permission_manager.permission_manager.get_permissions": "snehraj.permission.get_permissions",
-	"frappe.core.page.permission_manager.permission_manager.add": "snehraj.permission.add",
-	"frappe.core.page.permission_manager.permission_manager.update": "snehraj.permission.update",
-	"frappe.core.page.permission_manager.permission_manager.remove": "snehraj.permission.remove",
-	"frappe.core.page.permission_manager.permission_manager.reset": "snehraj.permission.reset",
-	"frappe.core.page.permission_manager.permission_manager.get_users_with_role": "snehraj.permission.get_users_with_role",
-	"frappe.core.page.permission_manager.permission_manager.get_standard_permissions": "snehraj.permission.get_standard_permissions",
-	"frappe.utils.print_format.download_multi_pdf": "snehraj.print_format.download_multi_pdf",
-	# "erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry": "snehraj.api.make_stock_entry",
+    "frappe.core.page.permission_manager.permission_manager.get_roles_and_doctypes": "snehraj.permission.get_roles_and_doctypes",
+    "frappe.core.page.permission_manager.permission_manager.get_permissions": "snehraj.permission.get_permissions",
+    "frappe.core.page.permission_manager.permission_manager.add": "snehraj.permission.add",
+    "frappe.core.page.permission_manager.permission_manager.update": "snehraj.permission.update",
+    "frappe.core.page.permission_manager.permission_manager.remove": "snehraj.permission.remove",
+    "frappe.core.page.permission_manager.permission_manager.reset": "snehraj.permission.reset",
+    "frappe.core.page.permission_manager.permission_manager.get_users_with_role": "snehraj.permission.get_users_with_role",
+    "frappe.core.page.permission_manager.permission_manager.get_standard_permissions": "snehraj.permission.get_standard_permissions",
+    "frappe.utils.print_format.download_multi_pdf": "snehraj.print_format.download_multi_pdf",
+    # "erpnext.manufacturing.doctype.work_order.work_order.make_stock_entry": "snehraj.api.make_stock_entry",
 }
 
 doc_events = {
-	"Sales Order": {
-		"validate": "snehraj.api.so_validate",
-		"before_save": "snehraj.api.so_before_save",
-		"on_submit": "snehraj.api.so_on_submit",
-	},
-	"Delivery Note": {
-		"on_submit": "snehraj.api.dn_on_submit",
-		"before_cancel": "snehraj.api.dn_before_cancel",
-		"on_update_after_submit": "snehraj.api.dn_on_update_after_submit",
-	},
-	"Batch": {
-		'before_naming': "snehraj.batch_valuation.override_batch_autoname",
-	},
-	"Purchase Receipt": {
-		"validate": "snehraj.batch_valuation.pr_validate",
-		"on_cancel": "snehraj.batch_valuation.pr_on_cancel",
-	},
-	"Purchase Invoice": {
-		"validate": "snehraj.batch_valuation.pi_validate",
-		"on_cancel": "snehraj.batch_valuation.pi_on_cancel",
-		"before_save": "snehraj.api.pi_before_save"
-	},
-	"Stock Entry": {
-		"validate": "snehraj.batch_valuation.stock_entry_validate",
-		"on_submit": "snehraj.batch_valuation.stock_entry_on_submit",
-		"on_cancel": "snehraj.batch_valuation.stock_entry_on_cancel",
-	},
-	"Landed Cost Voucher": {
-		"validate": [
-			"snehraj.batch_valuation.lcv_validate",
-			"snehraj.api.lcv_validate",
-		],
-		"on_submit": "snehraj.batch_valuation.lcv_on_submit",
-		"on_cancel": [
-			"snehraj.batch_valuation.lcv_on_cancel",
-			"snehraj.api.lcv_on_cancel",
-		],
-	},
-	"BOM":{
-		"before_save":"snehraj.api.bom_before_save"
-	},
-	("Sales Invoice", "Purchase Invoice", "Payment Request", "Payment Entry", "Journal Entry", "Material Request", "Purchase Order", "Work Order", "Production Plan", "Stock Entry", "Quotation", "Sales Order", "Delivery Note", "Purchase Receipt", "Packing Slip"): {
-		"before_naming": "snehraj.api.docs_before_naming",
-	},
-	"Job Card": {
-		"validate": "snehraj.api.job_card_validate",
-		"on_submit": "snehraj.api.job_card_on_submit",
-		"on_cancel": "snehraj.api.job_card_on_cancel",
-	},
-	"Fiscal Year": {
-		'before_save': 'snehraj.api.fiscal_before_save'
-	},
+    "Sales Order": {
+        "validate": "snehraj.api.so_validate",
+        "before_save": "snehraj.api.so_before_save",
+        "on_submit": "snehraj.api.so_on_submit",
+    },
+    "Delivery Note": {
+        "on_submit": "snehraj.api.dn_on_submit",
+        "before_cancel": "snehraj.api.dn_before_cancel",
+        "on_update_after_submit": "snehraj.api.dn_on_update_after_submit",
+    },
+    "Batch": {
+        'before_naming': "snehraj.batch_valuation.override_batch_autoname",
+    },
+    "Purchase Receipt": {
+        "validate": "snehraj.batch_valuation.pr_validate",
+        "on_cancel": "snehraj.batch_valuation.pr_on_cancel",
+    },
+    "Purchase Invoice": {
+        "validate": "snehraj.batch_valuation.pi_validate",
+        "on_cancel": "snehraj.batch_valuation.pi_on_cancel",
+        "before_save": "snehraj.api.pi_before_save"
+    },
+    "Stock Entry": {
+        "validate": "snehraj.batch_valuation.stock_entry_validate",
+        "on_submit": "snehraj.batch_valuation.stock_entry_on_submit",
+        "on_cancel": "snehraj.batch_valuation.stock_entry_on_cancel",
+    },
+    "Landed Cost Voucher": {
+        "validate": [
+            "snehraj.batch_valuation.lcv_validate",
+            "snehraj.api.lcv_validate",
+        ],
+        "on_submit": "snehraj.batch_valuation.lcv_on_submit",
+        "on_cancel": [
+            "snehraj.batch_valuation.lcv_on_cancel",
+            "snehraj.api.lcv_on_cancel",
+        ],
+    },
+    "BOM":{
+        "before_save":"snehraj.api.bom_before_save"
+    },
+    ("Sales Invoice", "Purchase Invoice", "Payment Request", "Payment Entry", "Journal Entry", "Material Request", "Purchase Order", "Work Order", "Production Plan", "Stock Entry", "Quotation", "Sales Order", "Delivery Note", "Purchase Receipt", "Packing Slip"): {
+        "before_naming": "snehraj.api.docs_before_naming",
+    },
+    "Job Card": {
+        "validate": "snehraj.api.job_card_validate",
+        "on_submit": "snehraj.api.job_card_on_submit",
+        "on_cancel": "snehraj.api.job_card_on_cancel",
+    },
+    "Fiscal Year": {
+        'before_save': 'snehraj.api.fiscal_before_save'
+    },
 }
 
 
@@ -215,35 +215,35 @@ doc_events = {
 from snehraj.batch_valuation_overrides import get_supplied_items_cost,set_incoming_rate_buying,set_incoming_rate_selling,get_rate_for_return,get_incoming_rate,process_sle,get_args_for_incoming_rate
 
 # Buying controllers
-# from erpnext.controllers.buying_controller import BuyingController
-# BuyingController.get_supplied_items_cost = get_supplied_items_cost
-# BuyingController.set_incoming_rate = set_incoming_rate_buying
+from erpnext.controllers.buying_controller import BuyingController
+BuyingController.get_supplied_items_cost = get_supplied_items_cost
+BuyingController.set_incoming_rate = set_incoming_rate_buying
 
 # Selling controllers
-# from erpnext.controllers.selling_controller import SellingController
-# SellingController.set_incoming_rate = set_incoming_rate_selling
+from erpnext.controllers.selling_controller import SellingController
+SellingController.set_incoming_rate = set_incoming_rate_selling
 
 # sales and purchase return
-# from erpnext.controllers import sales_and_purchase_return
-# sales_and_purchase_return.get_rate_for_return =  get_rate_for_return
+from erpnext.controllers import sales_and_purchase_return
+sales_and_purchase_return.get_rate_for_return =  get_rate_for_return
 
 # utils
 
 # from erpnext.stock import utils
 # utils.get_incoming_rate =  get_incoming_rate
 
-# import erpnext
-# erpnext.stock.utils.get_incoming_rate = get_incoming_rate
+import erpnext
+erpnext.stock.utils.get_incoming_rate = get_incoming_rate
 
 # stock_ledger
-# from erpnext.stock.stock_ledger import update_entries_after
-# update_entries_after.process_sle =  process_sle
+from erpnext.stock.stock_ledger import update_entries_after
+update_entries_after.process_sle =  process_sle
 
 # stock entry
-# from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
-# StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate
+from erpnext.stock.doctype.stock_entry.stock_entry import StockEntry
+StockEntry.get_args_for_incoming_rate = get_args_for_incoming_rate
 
 
-# from snehraj.snehraj.report.trends import get_data as trends_data
-# from erpnext.controllers import trends
-# trends.get_data = trends_data
+from snehraj.snehraj.report.trends import get_data as trends_data
+from erpnext.controllers import trends
+trends.get_data = trends_data
